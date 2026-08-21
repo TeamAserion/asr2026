@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum — Team Aserion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #070c0d;
+    --panel: #0f1a1c;
+    --panel-border: #1c2e30;
+    --turquoise: #2ee6c8;
+    --lime: #b6f24b;
+    --text: #e7f3f1;
+    --muted: #7f9a97;
+    --muted-2: #567270;
+/* ---------- site logo ---------- */
+.site-logo{
+  position:fixed;
+  top:1.4rem;
+  left:1.6rem;
+  z-index:20;
+}
+.site-logo a{
+  display:flex;
+  align-items:center;
+}
+.site-logo img{
+  width:52px;
+  height:52px;
+  display:block;
+  filter: drop-shadow(0 0 14px rgba(46,230,200,0.35));
+  transition: transform .2s ease, filter .2s ease;
+}
+.site-logo a:hover img{
+  transform:scale(1.06);
+  filter: drop-shadow(0 0 20px rgba(46,230,200,0.55));
+}
+.site-logo a:focus-visible{
+  outline:2px solid var(--turquoise);
+  outline-offset:4px;
+  border-radius:50%;
+}
+@media (max-width:520px){
+  .site-logo{ top:1rem; left:1rem; }
+  .site-logo img{ width:42px; height:42px; }
+}
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(46,230,200,0.08), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Chakra Petch', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .grid-overlay{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      linear-gradient(rgba(46,230,200,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46,230,200,0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
+  }
+
+  header{
+    position:relative; z-index:1;
+    padding: 6vh 6vw 4vh;
+    max-width:820px;
+    margin:0 auto;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .back-link{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:600;
+    font-size:.8rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:.4rem;
+    margin-bottom:2rem;
+    transition:color .2s ease;
+  }
+  .back-link:hover{ color:var(--turquoise); }
+
+  h1{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size:clamp(2.2rem, 6vw, 3.4rem);
+    margin:0;
+    background:linear-gradient(100deg, var(--turquoise) 10%, var(--lime) 90%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  main{
+    position:relative; z-index:1;
+    max-width:820px;
+    margin:0 auto;
+    padding: 3.5rem 6vw 6rem;
+  }
+
+  section{
+    margin-bottom:2.4rem;
+  }
+  h2{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size:1.15rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+    margin:0 0 .8rem;
+    padding-bottom:.6rem;
+    border-bottom:1px solid var(--panel-border);
+  }
+  p, li{
+    font-size:.98rem;
+    line-height:1.7;
+    color:#c7dbd8;
+    margin:0 0 .5rem;
+  }
+  a{ color:var(--lime); }
+  .placeholder{
+    color:var(--muted);
+    font-style:italic;
+  }
+  footer{
+    position:relative; z-index:1;
+    text-align:center;
+    padding:2.5rem 6vw 3rem;
+    color:var(--muted-2);
+    font-family:'Rajdhani', sans-serif;
+    letter-spacing:.15em;
+    font-size:.75rem;
+    text-transform:uppercase;
+    border-top:1px solid var(--panel-border);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+
+<div class="site-logo">
+  <a href="index.html" aria-label="Team Aserion — Zur Startseite">
+    <img src="asr-logo.png" alt="Team Aserion Logo">
+  </a>
+</div>
+
+<header>
+  <a class="back-link" href="index.html">← Zurück zu Team Aserion</a>
+  <h1>Impressum</h1>
+</header>
+
+<main>
+
+  <section>
+    <h2>Kontakt</h2>
+    <p class="placeholder">
+      E-Mail: aserionteam@gmail.com<br>
+      Discord: <a href="https://discord.gg/AVAUqVXzA8" target="_blank" rel="noopener noreferrer">discord.gg/AVAUqVXzA8</a>
+    </p>
+  </section>
+
+  <section>
+    <h2>Haftungsausschluss</h2>
+    <p>
+      Die Inhalte dieser Website wurden mit grösstmöglicher Sorgfalt erstellt. Für die Richtigkeit,
+      Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden.
+      Für Inhalte externer Links sind ausschliesslich deren Betreiber verantwortlich.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  Team Aserion — Fortnite Competitive Organisation
+</footer>
+
+</body>
+</html>
