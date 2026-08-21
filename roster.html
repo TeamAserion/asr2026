@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roster — Team Aserion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #070c0d;
+    --panel: #0f1a1c;
+    --panel-border: #1c2e30;
+    --turquoise: #2ee6c8;
+    --lime: #b6f24b;
+    --text: #e7f3f1;
+    --muted: #7f9a97;
+    --muted-2: #567270;
+  }
+
+  /* ---------- site logo ---------- */
+  .site-logo{
+    position:fixed;
+    top:1.4rem;
+    left:1.6rem;
+    z-index:20;
+  }
+  .site-logo a{
+    display:flex;
+    align-items:center;
+  }
+  .site-logo img{
+    width:52px;
+    height:52px;
+    display:block;
+    filter: drop-shadow(0 0 14px rgba(46,230,200,0.35));
+    transition: transform .2s ease, filter .2s ease;
+  }
+  .site-logo a:hover img{
+    transform:scale(1.06);
+    filter: drop-shadow(0 0 20px rgba(46,230,200,0.55));
+  }
+  .site-logo a:focus-visible{
+    outline:2px solid var(--turquoise);
+    outline-offset:4px;
+    border-radius:50%;
+  }
+  @media (max-width:520px){
+    .site-logo{ top:1rem; left:1rem; }
+    .site-logo img{ width:42px; height:42px; }
+  }
+
+  /* ---------- menu ---------- */
+  .menu-wrap{
+    position:fixed;
+    top:1.4rem;
+    right:1.6rem;
+    z-index:30;
+  }
+  .menu-btn{
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size:.8rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--text);
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    padding:.7rem 1.1rem;
+    cursor:pointer;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .menu-btn:hover{ border-color: rgba(46,230,200,0.5); color:var(--turquoise); }
+  .menu-btn svg{ width:18px; height:18px; }
+  .menu-btn:focus-visible{ outline:2px solid var(--turquoise); outline-offset:3px; }
+
+  .menu-dropdown{
+    position:absolute;
+    top:calc(100% + .6rem);
+    right:0;
+    min-width:200px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    padding:.5rem;
+    display:none;
+    flex-direction:column;
+    gap:.2rem;
+    clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+  }
+  .menu-dropdown.open{ display:flex; }
+  .menu-dropdown a{
+    display:block;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:600;
+    font-size:.9rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--text);
+    text-decoration:none;
+    padding:.6rem .7rem;
+    transition: background .2s ease, color .2s ease;
+  }
+  .menu-dropdown a:hover{ background: rgba(46,230,200,0.08); color:var(--turquoise); }
+  .menu-dropdown a.active{ color:var(--lime); }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(46,230,200,0.10), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 85% 10%, rgba(182,242,75,0.06), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Chakra Petch', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .grid-overlay{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      linear-gradient(rgba(46,230,200,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46,230,200,0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
+  }
+
+  header.hero{
+    position:relative;
+    z-index:1;
+    padding: 8vh 6vw 5vh;
+    text-align:center;
+    border-bottom:1px solid var(--panel-border);
+  }
+
+  .eyebrow{
+    font-family:'Rajdhani', sans-serif;
+    letter-spacing:0.45em;
+    font-size:0.72rem;
+    font-weight:600;
+    color:var(--muted);
+    text-transform:uppercase;
+    margin:0 0 1.4rem;
+  }
+  .eyebrow::before{ content:"// "; color:var(--turquoise); }
+
+  h1.title{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size:clamp(2.6rem, 8vw, 5.5rem);
+    line-height:0.95;
+    margin:0;
+    background:linear-gradient(100deg, var(--turquoise) 10%, var(--lime) 90%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .hero-note{
+    max-width:560px;
+    margin:1.4rem auto 0;
+    color:var(--muted);
+    font-size:0.95rem;
+    line-height:1.6;
+  }
+
+  main{
+    position:relative; z-index:1;
+    padding: 4.5rem 6vw 7rem;
+    max-width:1280px;
+    margin:0 auto;
+  }
+
+  .section-title{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size:clamp(1.4rem, 3vw, 2rem);
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    margin:0 0 .5rem;
+    color:var(--text);
+  }
+  .section-title span{ color:var(--turquoise); }
+  .section-sub{
+    color:var(--muted);
+    font-size:.9rem;
+    margin:0 0 2rem;
+  }
+
+  .roster-section{ margin-bottom:5rem; }
+  .roster-section:last-child{ margin-bottom:0; }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:1.3rem;
+  }
+
+  .player-card{
+    position:relative;
+    background:linear-gradient(160deg, var(--panel), rgba(15,26,28,0.5));
+    border:1px solid var(--panel-border);
+    padding:1.6rem 1.5rem;
+    clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+    transition: border-color .25s ease, transform .25s ease, background .25s ease;
+  }
+  .player-card:hover{
+    transform:translateY(-4px);
+    border-color: rgba(46,230,200,0.5);
+    background:linear-gradient(160deg, #132123, rgba(15,26,28,0.6));
+  }
+
+  .player-name{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size:1.3rem;
+    margin:0 0 .2rem;
+  }
+  .player-role{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:600;
+    font-size:.72rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--lime);
+    margin:0 0 1.1rem;
+  }
+
+  .player-socials{
+    display:flex;
+    gap:.6rem;
+  }
+  .social-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:1px solid var(--panel-border);
+    background:rgba(0,0,0,0.2);
+    color:var(--turquoise);
+    transition: transform .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .social-btn svg{ width:17px; height:17px; fill:currentColor; }
+  .social-btn:hover{
+    transform:translateY(-2px);
+    border-color: rgba(46,230,200,0.5);
+    color:var(--lime);
+  }
+  .social-btn:focus-visible{ outline:2px solid var(--turquoise); outline-offset:2px; }
+
+  footer{
+    position:relative; z-index:1;
+    text-align:center;
+    padding:3rem 6vw 4rem;
+    color:var(--muted-2);
+    font-family:'Rajdhani', sans-serif;
+    letter-spacing:.15em;
+    font-size:.75rem;
+    text-transform:uppercase;
+    border-top:1px solid var(--panel-border);
+  }
+  .footer-links{
+    display:flex;
+    justify-content:center;
+    gap:1.6rem;
+    margin-bottom:1.2rem;
+    flex-wrap:wrap;
+  }
+  .footer-links a{
+    color:var(--muted);
+    text-decoration:none;
+    letter-spacing:.12em;
+    transition:color .2s ease;
+  }
+  .footer-links a:hover{ color:var(--turquoise); }
+  .footer-links a.active{ color:var(--lime); }
+  .footer-sep{ color:var(--panel-border); }
+
+  @media (max-width:520px){
+    .player-card{ clip-path:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-logo">
+  <a href="index.html" aria-label="Team Aserion — Zur Startseite">
+    <img src="asr-logo.png" alt="Team Aserion Logo">
+  </a>
+</div>
+
+<div class="menu-wrap">
+  <button class="menu-btn" id="menuBtn" aria-haspopup="true" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    Menü
+  </button>
+  <nav class="menu-dropdown" id="menuDropdown">
+    <a href="roster.html" class="active">Roster</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutzerklärung</a>
+  </nav>
+</div>
+
+<div class="grid-overlay"></div>
+
+<header class="hero">
+  <p class="eyebrow">Fortnite Competitive</p>
+  <h1 class="title">ROSTER</h1>
+  <p class="hero-note">Unser Main Team und unsere Content Creator — die Gesichter von Team Aserion.</p>
+</header>
+
+<main>
+
+  <section class="roster-section">
+    <h2 class="section-title">ASR <span>|</span> Main Team</h2>
+    <p class="section-sub">Unsere Main-Spieler — rein über Scouting ausgewählt.</p>
+    <div class="grid">
+
+      <!-- Spieler-Vorlage: Karte duplizieren und Angaben ersetzen -->
+      <article class="player-card">
+        <h3 class="player-name">[Spielername]</h3>
+        <p class="player-role">Main Team</p>
+        <div class="player-socials">
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Spielername] auf X (Twitter)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Spielername] auf Twitch">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 2 2.75 6.25V19h5.5v3l3-3h3.75L20.25 13V2Zm14 10.25-3 3h-4l-2.5 2.5v-2.5h-3.5V3.75h13.25ZM15.75 6.5v5.25h-2V6.5Zm-4.5 0v5.25h-2V6.5Z"/></svg>
+          </a>
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Spielername] auf TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82c-1.01-.87-1.61-2.14-1.61-3.52h-3.19v13.9c0 1.59-1.29 2.88-2.88 2.88s-2.88-1.29-2.88-2.88 1.29-2.88 2.88-2.88c.31 0 .6.05.88.14V9.99a6.09 6.09 0 0 0-.88-.06 6.11 6.11 0 1 0 6.11 6.11V8.66a8.9 8.9 0 0 0 5.19 1.66V6.99c-1.42 0-2.72-.44-3.62-1.17Z"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Weitere Spieler: diesen Block kopieren und einfügen -->
+      <article class="player-card">
+        <h3 class="player-name">[Spielername]</h3>
+        <p class="player-role">Main Team</p>
+        <div class="player-socials">
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Spielername] auf X (Twitter)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Spielername] auf Twitch">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 2 2.75 6.25V19h5.5v3l3-3h3.75L20.25 13V2Zm14 10.25-3 3h-4l-2.5 2.5v-2.5h-3.5V3.75h13.25ZM15.75 6.5v5.25h-2V6.5Zm-4.5 0v5.25h-2V6.5Z"/></svg>
+          </a>
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Spielername] auf TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82c-1.01-.87-1.61-2.14-1.61-3.52h-3.19v13.9c0 1.59-1.29 2.88-2.88 2.88s-2.88-1.29-2.88-2.88 1.29-2.88 2.88-2.88c.31 0 .6.05.88.14V9.99a6.09 6.09 0 0 0-.88-.06 6.11 6.11 0 1 0 6.11 6.11V8.66a8.9 8.9 0 0 0 5.19 1.66V6.99c-1.42 0-2.72-.44-3.62-1.17Z"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="roster-section">
+    <h2 class="section-title">ASR <span>|</span> Content Creator</h2>
+    <p class="section-sub">Die Content Creator von Team Aserion.</p>
+    <div class="grid">
+
+      <!-- Creator-Vorlage: Karte duplizieren und Angaben ersetzen -->
+      <article class="player-card">
+        <h3 class="player-name">[Creator-Name]</h3>
+        <p class="player-role">Content Creator</p>
+        <div class="player-socials">
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Creator-Name] auf X (Twitter)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Creator-Name] auf Twitch">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 2 2.75 6.25V19h5.5v3l3-3h3.75L20.25 13V2Zm14 10.25-3 3h-4l-2.5 2.5v-2.5h-3.5V3.75h13.25ZM15.75 6.5v5.25h-2V6.5Zm-4.5 0v5.25h-2V6.5Z"/></svg>
+          </a>
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Creator-Name] auf YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.9 4.75 12 4.75 12 4.75s-5.9 0-7.64.49a2.75 2.75 0 0 0-1.94 1.95A28.6 28.6 0 0 0 2 12a28.6 28.6 0 0 0 .42 4.81 2.75 2.75 0 0 0 1.94 1.95c1.74.49 7.64.49 7.64.49s5.9 0 7.64-.49a2.75 2.75 0 0 0 1.94-1.95A28.6 28.6 0 0 0 22 12a28.6 28.6 0 0 0-.42-4.81ZM10 15.02V8.98L15.5 12Z"/></svg>
+          </a>
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Creator-Name] auf TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82c-1.01-.87-1.61-2.14-1.61-3.52h-3.19v13.9c0 1.59-1.29 2.88-2.88 2.88s-2.88-1.29-2.88-2.88 1.29-2.88 2.88-2.88c.31 0 .6.05.88.14V9.99a6.09 6.09 0 0 0-.88-.06 6.11 6.11 0 1 0 6.11 6.11V8.66a8.9 8.9 0 0 0 5.19 1.66V6.99c-1.42 0-2.72-.44-3.62-1.17Z"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Weitere Creator: diesen Block kopieren und einfügen -->
+      <article class="player-card">
+        <h3 class="player-name">[Creator-Name]</h3>
+        <p class="player-role">Content Creator</p>
+        <div class="player-socials">
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Creator-Name] auf X (Twitter)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Creator-Name] auf Twitch">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 2 2.75 6.25V19h5.5v3l3-3h3.75L20.25 13V2Zm14 10.25-3 3h-4l-2.5 2.5v-2.5h-3.5V3.75h13.25ZM15.75 6.5v5.25h-2V6.5Zm-4.5 0v5.25h-2V6.5Z"/></svg>
+          </a>
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Creator-Name] auf YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.9 4.75 12 4.75 12 4.75s-5.9 0-7.64.49a2.75 2.75 0 0 0-1.94 1.95A28.6 28.6 0 0 0 2 12a28.6 28.6 0 0 0 .42 4.81 2.75 2.75 0 0 0 1.94 1.95c1.74.49 7.64.49 7.64.49s5.9 0 7.64-.49a2.75 2.75 0 0 0 1.94-1.95A28.6 28.6 0 0 0 22 12a28.6 28.6 0 0 0-.42-4.81ZM10 15.02V8.98L15.5 12Z"/></svg>
+          </a>
+          <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="[Creator-Name] auf TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82c-1.01-.87-1.61-2.14-1.61-3.52h-3.19v13.9c0 1.59-1.29 2.88-2.88 2.88s-2.88-1.29-2.88-2.88 1.29-2.88 2.88-2.88c.31 0 .6.05.88.14V9.99a6.09 6.09 0 0 0-.88-.06 6.11 6.11 0 1 0 6.11 6.11V8.66a8.9 8.9 0 0 0 5.19 1.66V6.99c-1.42 0-2.72-.44-3.62-1.17Z"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <nav class="footer-links">
+    <a href="roster.html" class="active">Roster</a>
+    <span class="footer-sep">/</span>
+    <a href="impressum.html">Impressum</a>
+    <span class="footer-sep">/</span>
+    <a href="datenschutz.html">Datenschutzerklärung</a>
+  </nav>
+  Team Aserion — Fortnite Competitive Organisation
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = menuDropdown.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  document.addEventListener('click', (e) => {
+    if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
+      menuDropdown.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+</body>
+</html>
