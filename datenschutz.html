@@ -16,38 +16,97 @@
     --text: #e7f3f1;
     --muted: #7f9a97;
     --muted-2: #567270;
-/* ---------- site logo ---------- */
-.site-logo{
-  position:fixed;
-  top:1.4rem;
-  left:1.6rem;
-  z-index:20;
-}
-.site-logo a{
-  display:flex;
-  align-items:center;
-}
-.site-logo img{
-  width:52px;
-  height:52px;
-  display:block;
-  filter: drop-shadow(0 0 14px rgba(46,230,200,0.35));
-  transition: transform .2s ease, filter .2s ease;
-}
-.site-logo a:hover img{
-  transform:scale(1.06);
-  filter: drop-shadow(0 0 20px rgba(46,230,200,0.55));
-}
-.site-logo a:focus-visible{
-  outline:2px solid var(--turquoise);
-  outline-offset:4px;
-  border-radius:50%;
-}
-@media (max-width:520px){
-  .site-logo{ top:1rem; left:1rem; }
-  .site-logo img{ width:42px; height:42px; }
-}
   }
+
+  /* ---------- site logo ---------- */
+  .site-logo{
+    position:fixed;
+    top:1.4rem;
+    left:1.6rem;
+    z-index:20;
+  }
+  .site-logo a{
+    display:flex;
+    align-items:center;
+  }
+  .site-logo img{
+    width:52px;
+    height:52px;
+    display:block;
+    filter: drop-shadow(0 0 14px rgba(46,230,200,0.35));
+    transition: transform .2s ease, filter .2s ease;
+  }
+  .site-logo a:hover img{
+    transform:scale(1.06);
+    filter: drop-shadow(0 0 20px rgba(46,230,200,0.55));
+  }
+  .site-logo a:focus-visible{
+    outline:2px solid var(--turquoise);
+    outline-offset:4px;
+    border-radius:50%;
+  }
+  @media (max-width:520px){
+    .site-logo{ top:1rem; left:1rem; }
+    .site-logo img{ width:42px; height:42px; }
+  }
+
+  /* ---------- menu ---------- */
+  .menu-wrap{
+    position:fixed;
+    top:1.4rem;
+    right:1.6rem;
+    z-index:30;
+  }
+  .menu-btn{
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size:.8rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--text);
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    padding:.7rem 1.1rem;
+    cursor:pointer;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .menu-btn:hover{ border-color: rgba(46,230,200,0.5); color:var(--turquoise); }
+  .menu-btn svg{ width:18px; height:18px; }
+  .menu-btn:focus-visible{ outline:2px solid var(--turquoise); outline-offset:3px; }
+
+  .menu-dropdown{
+    position:absolute;
+    top:calc(100% + .6rem);
+    right:0;
+    min-width:200px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    padding:.5rem;
+    display:none;
+    flex-direction:column;
+    gap:.2rem;
+    clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+  }
+  .menu-dropdown.open{ display:flex; }
+  .menu-dropdown a{
+    display:block;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:600;
+    font-size:.9rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--text);
+    text-decoration:none;
+    padding:.6rem .7rem;
+    transition: background .2s ease, color .2s ease;
+  }
+  .menu-dropdown a:hover{ background: rgba(46,230,200,0.08); color:var(--turquoise); }
+  .menu-dropdown a.active{ color:var(--lime); }
+
   *{box-sizing:border-box;}
   body{
     margin:0;
@@ -158,10 +217,23 @@
 <body>
 
 <div class="grid-overlay"></div>
-  <div class="site-logo">
+
+<div class="site-logo">
   <a href="index.html" aria-label="Team Aserion — Zur Startseite">
     <img src="asr-logo.png" alt="Team Aserion Logo">
   </a>
+</div>
+
+<div class="menu-wrap">
+  <button class="menu-btn" id="menuBtn" aria-haspopup="true" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    Menü
+  </button>
+  <nav class="menu-dropdown" id="menuDropdown">
+    <a href="roster.html">Roster</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html" class="active">Datenschutzerklärung</a>
+  </nav>
 </div>
 
 <header>
@@ -190,7 +262,7 @@
    Auf dieser Seite sind Buttons hinterlegt, die auf unseren Websiten unserer anderen Social-Media Kanäle verlinken.
       Beim Klick verlässt du diese Website und wirst zu den entsprechenden Websiten weitergeleitet. Es werden zu diesem Zeitpunkt noch keine
       Daten an jene Plattformen übermittelt — dies geschieht erst, wenn du den Link aktiv
-      anklickst und zu der neuen Website gelangst. Es gilt dann die Datenschutzerklärung von den jeweiligen Plattformen</a>.
+      anklickst und zu der neuen Website gelangst. Es gilt dann die Datenschutzerklärung von den jeweiligen Plattformen.
     </p>
   </section>
 
@@ -222,7 +294,7 @@
       Diese Datenschutzerklärung kann bei Bedarf angepasst werden, etwa wenn sich
       die Funktionen der Website ändern. Es gilt jeweils die aktuell auf dieser
       Seite veröffentlichte Fassung.
-      
+
       <strong>Stand: August 2026</strong>
     </p>
   </section>
@@ -231,6 +303,21 @@
 <footer>
   Team Aserion — Fortnite Competitive Organisation
 </footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = menuDropdown.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  document.addEventListener('click', (e) => {
+    if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
+      menuDropdown.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
 
 </body>
 </html>
