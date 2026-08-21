@@ -51,6 +51,62 @@
     .site-logo img{ width:42px; height:42px; }
   }
 
+  /* ---------- menu ---------- */
+  .menu-wrap{
+    position:fixed;
+    top:1.4rem;
+    right:1.6rem;
+    z-index:30;
+  }
+  .menu-btn{
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size:.8rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--text);
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    padding:.7rem 1.1rem;
+    cursor:pointer;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .menu-btn:hover{ border-color: rgba(46,230,200,0.5); color:var(--turquoise); }
+  .menu-btn svg{ width:18px; height:18px; }
+  .menu-btn:focus-visible{ outline:2px solid var(--turquoise); outline-offset:3px; }
+
+  .menu-dropdown{
+    position:absolute;
+    top:calc(100% + .6rem);
+    right:0;
+    min-width:200px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    padding:.5rem;
+    display:none;
+    flex-direction:column;
+    gap:.2rem;
+    clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+  }
+  .menu-dropdown.open{ display:flex; }
+  .menu-dropdown a{
+    display:block;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:600;
+    font-size:.9rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--text);
+    text-decoration:none;
+    padding:.6rem .7rem;
+    transition: background .2s ease, color .2s ease;
+  }
+  .menu-dropdown a:hover{ background: rgba(46,230,200,0.08); color:var(--turquoise); }
+
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -347,6 +403,23 @@
     clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
   }
 
+  .roster-link{
+    display:inline-flex;
+    align-items:center;
+    gap:.35rem;
+    margin-top:1.2rem;
+    font-family:'Rajdhani', sans-serif;
+    font-size:0.78rem;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+    text-decoration:none;
+    transition:color .2s ease, gap .2s ease;
+  }
+  .roster-link:hover{ color:var(--lime); gap:.55rem; }
+  .roster-link svg{ width:14px; height:14px; }
+
   footer{
     position:relative; z-index:1;
     text-align:center;
@@ -397,6 +470,18 @@
   <a href="index.html" aria-label="Team Aserion — Zur Startseite">
     <img src="asr-logo.png" alt="Team Aserion Logo">
   </a>
+</div>
+
+<div class="menu-wrap">
+  <button class="menu-btn" id="menuBtn" aria-haspopup="true" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    Menü
+  </button>
+  <nav class="menu-dropdown" id="menuDropdown">
+    <a href="roster.html">Roster</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutzerklärung</a>
+  </nav>
 </div>
 
 <div class="grid-overlay"></div>
@@ -498,6 +583,10 @@
         <li>Unsere Main-Spieler der Organisation</li>
         <li>Rein über Scouting — die Organisation sucht sich die Spieler eigenständig aus</li>
       </ul>
+      <a class="roster-link" href="roster.html">
+        Roster ansehen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </article>
 
     <!-- Content Creator -->
@@ -513,6 +602,11 @@
         <li>oder 5'000 TikTok-Follower bei Ø 2'000 Aufrufen</li>
       </ul>
       <span class="tag-note">Ingame Name → "ASR" oder "Aserion" innert 2 Wochen</span>
+      <br>
+      <a class="roster-link" href="roster.html">
+        Roster ansehen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </article>
 
     <!-- Coach -->
@@ -547,12 +641,29 @@
 
 <footer>
   <nav class="footer-links">
+    <a href="roster.html">Roster</a>
+    <span class="footer-sep">/</span>
     <a href="impressum.html">Impressum</a>
     <span class="footer-sep">/</span>
     <a href="datenschutz.html">Datenschutzerklärung</a>
   </nav>
   Team Aserion — Fortnite Competitive Organisation
 </footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = menuDropdown.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  document.addEventListener('click', (e) => {
+    if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
+      menuDropdown.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
 
 </body>
 </html>
