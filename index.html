@@ -291,6 +291,7 @@
     display:grid;
     grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
     gap:1.4rem;
+    align-items:stretch;
   }
 
   .card{
@@ -300,6 +301,9 @@
     padding:1.9rem 1.8rem 1.7rem;
     clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
     transition: border-color .25s ease, transform .25s ease, background .25s ease;
+    display:flex;
+    flex-direction:column;
+    height:100%;
   }
   .card::before{
     content:"";
@@ -317,6 +321,13 @@
     transform:translateY(-4px);
     border-color: rgba(46,230,200,0.5);
     background:linear-gradient(160deg, #132123, rgba(15,26,28,0.6));
+  }
+
+  /* cards that navigate to roster.html when clicked anywhere */
+  .card.card-linked{ cursor:pointer; }
+  .card.card-linked:focus-visible{
+    outline:2px solid var(--turquoise);
+    outline-offset:3px;
   }
 
   .card-head{
@@ -401,13 +412,16 @@
     border:1px solid rgba(182,242,75,0.25);
     padding:.35rem .7rem;
     clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+    align-self:flex-start;
   }
 
+  /* pushes the roster link to the bottom of its card, regardless of content length */
   .roster-link{
     display:inline-flex;
     align-items:center;
     gap:.35rem;
-    margin-top:1.2rem;
+    margin-top:auto;
+    padding-top:1.2rem;
     font-family:'Rajdhani', sans-serif;
     font-size:0.78rem;
     font-weight:700;
@@ -416,9 +430,25 @@
     color:var(--turquoise);
     text-decoration:none;
     transition:color .2s ease, gap .2s ease;
+    align-self:flex-start;
+    position:relative;
+    z-index:1;
   }
   .roster-link:hover{ color:var(--lime); gap:.55rem; }
   .roster-link svg{ width:14px; height:14px; }
+
+  /* Apply-now card: button centered within the card */
+  .apply-card{
+    align-items:center;
+    text-align:center;
+  }
+  .apply-card .req-list{
+    text-align:left;
+  }
+  .apply-card .join-btn{
+    margin-top:auto;
+    align-self:center;
+  }
 
   footer{
     position:relative; z-index:1;
@@ -573,7 +603,7 @@
     </article>
 
     <!-- Main Team -->
-    <article class="card reveal" style="animation-delay:.25s">
+    <article class="card card-linked reveal" style="animation-delay:.25s" data-href="roster.html" tabindex="0" role="link" aria-label="ASR Main Team — Roster ansehen">
       <div class="card-head">
         <h3 class="role-name">ASR <span class="pipe">|</span> Main Team</h3>
         <span class="pr-range">Scouting</span>
@@ -590,7 +620,7 @@
     </article>
 
     <!-- Content Creator -->
-    <article class="card reveal" style="animation-delay:.3s">
+    <article class="card card-linked reveal" style="animation-delay:.3s" data-href="roster.html" tabindex="0" role="link" aria-label="ASR Content Creator — Roster ansehen">
       <div class="card-head">
         <h3 class="role-name">ASR <span class="pipe">|</span> Content Creator</h3>
         <span class="pr-range">Reichweite</span>
@@ -602,7 +632,6 @@
         <li>oder 5'000 TikTok-Follower bei Ø 2'000 Aufrufen</li>
       </ul>
       <span class="tag-note">Ingame Name → "ASR" oder "Aserion" innert 2 Wochen</span>
-      <br>
       <a class="roster-link" href="roster.html">
         Roster ansehen
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -635,32 +664,33 @@
         <li>Bereitschaft zur langfristigen und professionellen Zusammenarbeit</li>
       </ul>
     </article>
+
     <!-- Want to join -->
-<article class="card reveal" style="animation-delay:.45s">
-  <div class="card-head">
-    <h3 class="role-name">Want to Join?</h3>
-    <span class="pr-range">Team Aserion</span>
-  </div>
+    <article class="card apply-card reveal" style="animation-delay:.45s">
+      <div class="card-head">
+        <h3 class="role-name">Want to Join?</h3>
+        <span class="pr-range">Team Aserion</span>
+      </div>
 
-  <ul class="req-list">
-    <li>Du möchtest Teil von Team Aserion werden?</li>
-    <li>Tritt unserem Discord-Server bei und öffne ein Bewerbungsticket.</li>
-    <li>Wähle die passende Rolle und das Team wird sich um dein Anliegen kümmern.</li>
-  </ul>
+      <ul class="req-list">
+        <li>Du möchtest Teil von Team Aserion werden?</li>
+        <li>Tritt unserem Discord-Server bei und öffne ein Bewerbungsticket.</li>
+        <li>Wähle die passende Rolle und das Team wird sich um dein Anliegen kümmern.</li>
+      </ul>
 
-  <a
-    class="join-btn"
-    href="https://discord.gg/AVAUqVXzA8"
-    target="_blank"
-    rel="noopener noreferrer"
-    style="margin-top:1.5rem;"
-  >
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.319 13.58.099 18.058a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.076.076 0 0 0-.04.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.029 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.673-3.548-13.66a.061.061 0 0 0-.031-.028ZM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.211 0 2.176 1.096 2.157 2.42 0 1.332-.955 2.418-2.157 2.418Zm7.974 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.211 0 2.176 1.096 2.157 2.42 0 1.332-.946 2.418-2.157 2.418Z"/>
-    </svg>
-    Apply now!
-  </a>
-</article>
+      <a
+        class="join-btn"
+        href="https://discord.gg/AVAUqVXzA8"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="margin-top:1.5rem;"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.319 13.58.099 18.058a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.076.076 0 0 0-.04.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.029 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.673-3.548-13.66a.061.061 0 0 0-.031-.028ZM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.211 0 2.176 1.096 2.157 2.42 0 1.332-.955 2.418-2.157 2.418Zm7.974 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.211 0 2.176 1.096 2.157 2.42 0 1.332-.946 2.418-2.157 2.418Z"/>
+        </svg>
+        Apply now!
+      </a>
+    </article>
 
   </div>
 </main>
@@ -688,6 +718,22 @@
       menuDropdown.classList.remove('open');
       menuBtn.setAttribute('aria-expanded', 'false');
     }
+  });
+
+  // make whole card clickable -> navigates to its data-href,
+  // while clicks on the actual "Roster ansehen" link still work normally
+  document.querySelectorAll('.card-linked').forEach((card) => {
+    const target = card.dataset.href;
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return; // let the real link handle its own click
+      window.location.href = target;
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        window.location.href = target;
+      }
+    });
   });
 </script>
 
