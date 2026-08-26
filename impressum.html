@@ -203,22 +203,6 @@
     text-transform:uppercase;
     border-top:1px solid var(--panel-border);
   }
-  .footer-links{
-    display:flex;
-    justify-content:center;
-    gap:1.6rem;
-    margin-bottom:1.2rem;
-    flex-wrap:wrap;
-  }
-  .footer-links a{
-    color:var(--muted);
-    text-decoration:none;
-    letter-spacing:.12em;
-    transition:color .2s ease;
-  }
-  .footer-links a:hover{ color:var(--turquoise); }
-  .footer-links a.active{ color:var(--lime); }
-  .footer-sep{ color:var(--panel-border); }
 </style>
 </head>
 <body>
@@ -244,11 +228,15 @@
   <nav class="menu-dropdown" id="menuDropdown">
     <a href="vorteile.html">Vorteile</a>
     <a href="roster.html">Roster</a>
-    <a href="impressum.html" class="active">Impressum</a>
+    <a href="impressum.html">Impressum</a>
     <a href="datenschutz.html">Datenschutzerklärung</a>
   </nav>
 </div>
 
+<header>
+  <a class="back-link" href="index.html">← Zurück zu Team Aserion</a>
+  <h1>Impressum</h1>
+</header>
 
 <main>
 
@@ -272,15 +260,6 @@
 </main>
 
 <footer>
-  <nav class="footer-links">
-    <a href="vorteile.html">Vorteile</a>
-    <span class="footer-sep">/</span>
-    <a href="roster.html">Roster</a>
-    <span class="footer-sep">/</span>
-    <a href="impressum.html" class="active">Impressum</a>
-    <span class="footer-sep">/</span>
-    <a href="datenschutz.html">Datenschutzerklärung</a>
-  </nav>
   Team Aserion — Fortnite Competitive Organisation
 </footer>
 
