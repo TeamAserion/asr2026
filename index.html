@@ -437,6 +437,19 @@
   .roster-link:hover{ color:var(--lime); gap:.55rem; }
   .roster-link svg{ width:14px; height:14px; }
 
+  /* holds two roster-link items side by side at the bottom of a card */
+  .card-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4rem 1.3rem;
+    margin-top:auto;
+    padding-top:1.2rem;
+  }
+  .card-links .roster-link{
+    margin-top:0;
+    padding-top:0;
+  }
+
   /* Apply-now card: only the button is centered, title/badge/list keep the same layout as every other card */
   .apply-card .join-btn{
     margin-top:auto;
@@ -554,6 +567,10 @@
         <li>Regelmässige Teilnahme an Cups ist Pflicht</li>
       </ul>
       <span class="tag-note">Ingame Name → "ASR" oder "Aserion" innert 2 Wochen</span>
+      <a class="roster-link" href="vorteile.html">
+        Vorteile ansehen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </article>
 
     <!-- Potential -->
@@ -569,6 +586,10 @@
         <li>Engagierte Zusammenarbeit mit der Organisation</li>
       </ul>
       <span class="tag-note">Ingame Name → "ASR" oder "Aserion" innert 2 Wochen</span>
+      <a class="roster-link" href="vorteile.html">
+        Vorteile ansehen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </article>
 
     <!-- Talents -->
@@ -584,6 +605,10 @@
         <li>Engagierte Zusammenarbeit mit der Organisation</li>
       </ul>
       <span class="tag-note">Ingame Name → "ASR" oder "Aserion" innert 2 Wochen</span>
+      <a class="roster-link" href="vorteile.html">
+        Vorteile ansehen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </article>
 
     <!-- Academy -->
@@ -598,6 +623,10 @@
         <li>Fokus und Ziel liegt klar auf dem Erreichen von Earnings</li>
       </ul>
       <span class="tag-note">Ingame Name → "ASR" oder "Aserion" innert 2 Wochen</span>
+      <a class="roster-link" href="vorteile.html">
+        Vorteile ansehen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </article>
 
     <!-- Main Team -->
@@ -611,10 +640,16 @@
         <li>Unsere Main-Spieler der Organisation</li>
         <li>Rein über Scouting — die Organisation sucht sich die Spieler eigenständig aus</li>
       </ul>
-      <a class="roster-link" href="roster.html">
-        Roster ansehen
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+      <div class="card-links">
+        <a class="roster-link" href="roster.html">
+          Roster ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="roster-link" href="vorteile.html">
+          Vorteile ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </article>
 
     <!-- Content Creator -->
@@ -630,10 +665,16 @@
         <li>oder 5'000 TikTok-Follower bei Ø 2'000 Aufrufen</li>
       </ul>
       <span class="tag-note">Ingame Name → "ASR" oder "Aserion" innert 2 Wochen</span>
-      <a class="roster-link" href="roster.html">
-        Roster ansehen
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+      <div class="card-links">
+        <a class="roster-link" href="roster.html">
+          Roster ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="roster-link" href="vorteile.html">
+          Vorteile ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </article>
 
     <!-- Coach -->
@@ -648,6 +689,10 @@
         <li>Hohe Aktivität auf X (Twitter)</li>
         <li>Intensive Beschäftigung mit Fortnite Competitive</li>
       </ul>
+      <a class="roster-link" href="vorteile.html">
+        Vorteile ansehen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </article>
 
     <!-- Sponsoren -->
@@ -661,6 +706,10 @@
         <li>Produkt oder Dienstleistung, die zur Gaming &amp; Esports Community passt</li>
         <li>Bereitschaft zur langfristigen und professionellen Zusammenarbeit</li>
       </ul>
+      <a class="roster-link" href="vorteile.html">
+        Vorteile ansehen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </article>
 
     <!-- Want to join -->
